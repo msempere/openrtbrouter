@@ -28,11 +28,11 @@ const PACKAGE = "msempere.openrtbrouter"
 
 var log = logging.MustGetLogger(PACKAGE)
 
-func sendErrorResponse(w *http.ResponseWriter, err, details *string) {
+func sendErrorResponse(w *http.ResponseWriter, err, message *string) {
 }
 
 func sendDroppedBidResponse(w http.ResponseWriter) {
-    response := httpresponse.NewHttpResponse(204, "", "none")
+    response := httpresponse.NewHttpResponse(204, "application/json", "none")
     fmt.Fprintf(w, "%s", response.Get())
 }
 
