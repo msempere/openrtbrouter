@@ -1,0 +1,6 @@
+router:
+    path: /bidrequests
+    port: 12339
+    logs:
+        info: /var/logs/openrtbrouter/info.log
+
