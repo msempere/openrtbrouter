@@ -1,9 +1,11 @@
 package main
 
 import (
+    //"encoding/json"
     "flag"
     "fmt"
     "github.com/bsm/openrtb"
+    "github.com/msempere/httpresponse"
     "github.com/op/go-logging"
     "gopkg.in/yaml.v1"
     "io/ioutil"
@@ -26,6 +28,14 @@ const PACKAGE = "msempere.openrtbrouter"
 
 var log = logging.MustGetLogger(PACKAGE)
 
+func sendErrorResponse(w *http.ResponseWriter, err, details *string) {
+}
+
+func sendDroppedBidResponse(w http.ResponseWriter) {
+    response := httpresponse.NewHttpResponse(204, "", "none")
+    fmt.Fprintf(w, "%s", response.Get())
+}
+
 func handler(w http.ResponseWriter, r *http.Request) {
     defer r.Body.Close()
 
@@ -35,7 +45,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
     } else {
         log.Info("Received bid request %s", *req.Id)
     }
-    w.WriteHeader(204)
+    sendDroppedBidResponse(w)
 }
 
 func configure_logger(filename, format string) {
